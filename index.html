@@ -16,15 +16,22 @@
       crossorigin="anonymous"
     />
 
+    <link rel="stylesheet" href="styles.css" />
+
     <title>Hello, world!</title>
   </head>
   <body>
-    <a href="listAlbums()" class="btn btn-primary">List Albums</a>
+    <button type="button" class="btn btn-primary" onclick="listAlbum()">
+      List Album
+    </button>
+
     <a href="#" class="btn btn-secondary">Count Unique Albums</a>
-    <div class="container row my-3 d-flex"></div>
+    <div class="container-fluid row my-3 d-flex"></div>
+    <ol class="albumList"></ol>
 
     <script>
-      let musicData = document.querySelector(".container");
+      let musicData = document.querySelector(".container-fluid");
+      let albumDetails = document.querySelector(".albumList");
 
       const fetchData = (artist) => {
         let response = fetch(
@@ -38,17 +45,16 @@
 
             for (let result of results) {
               musicData.innerHTML += `<div class="card col-md-3 mx-1 my-2">
-  <img src="${result.album.cover}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${result.artist.name}</h5>
-    <h6 class="card-title">${result.title}</h6>
-  </div>
-</div>`;
+        <img src="${result.album.cover}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${result.artist.name}</h5>
+          <h6 class="card-title">${result.title}</h6>
+          <h6 class="card-title">${result.album.title}</h6>
+        </div>
+      </div>`;
             }
           });
       };
-
-      const listAlbums = () => {};
 
       window.onload = () => {
         fetchData("eminem");
